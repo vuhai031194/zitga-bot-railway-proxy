@@ -3,6 +3,8 @@ const { Client, GatewayIntentBits, ChannelType } = require('discord.js');
 const app = express();
 app.use(express.json());
 
+const PORT = process.env.PORT || 3000;
+
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
 });
@@ -18,7 +20,15 @@ client.once('ready', () => {
 app.post('/execute', async (req, res) => {
   const { action, token, channelId, data } = req.body;
 
+  // Kiểm tra nếu không có token trong request
+  if (!token) {
+    return res.status(400).json({ success: false, error: "No token provided in request" });
+  }
+
   try {
+    // Đăng nhập bằng token từ GAS gửi sang
+    await client.login(token);
+
     // 1. Kiểm tra hành động
     if (action === 'flushTask') {
       const channel = await client.channels.fetch(channelId);
@@ -66,7 +76,8 @@ async function getOrCreateThread(channel, dateStr) {
   return thread.id;
 }
 
-const PORT = process.env.PORT || 3000;
-client.login(process.env.DISCORD_TOKEN).then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, () => {
+  console.log(`🚀 Bridge Server is running on port ${PORT}`);
+  console.log(`Ready to receive tokens from GAS requests.`);
 });
