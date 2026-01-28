@@ -1,0 +1,25 @@
+{
+  "name": "zitga-bot-railway-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuhai031194/zitga-bot-railway-proxy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vuhai031194/zitga-bot-railway-proxy/issues"
+  },
+  "homepage": "https://github.com/vuhai031194/zitga-bot-railway-proxy#readme",
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "express": "^5.2.1"
+  }
+}
